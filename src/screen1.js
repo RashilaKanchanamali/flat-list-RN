@@ -9,9 +9,8 @@ class screen1 extends Component {
     constructor(props){
       super(props);
       this.state = {
-        //last: this.props.navigation.state.params.Last,
-        //first:this.props.navigation.state.params.First,
-        //id:this.props.navigation.state.params.id
+        lastName: this.props.navigation.state.params.lastName,
+        
       }
     }
     render() {
@@ -20,6 +19,7 @@ class screen1 extends Component {
         <View style={styles.container}>
 
         <Text>hello</Text>
+        <Text>{this.state.lastName}</Text>
 
         </View>
       );

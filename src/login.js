@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, View, ScrollView, Button, TextInput, Alert} from 'react-native';
+import {FlatList, StyleSheet, Text, View, ScrollView, Button, TextInput, Alert,TouchableOpacity} from 'react-native';
 
 class login extends Component {
   
@@ -18,33 +18,41 @@ class login extends Component {
       fetch('http://192.168.2.23:100/api/employee/getAll')
       .then(response => response.json())
       .then(lastName => this.setState({lastName}));
+      
       }; 
-
-  renderListItem = ({ item }) => (
     
-    <View>
-      <Text> { item.lastName}</Text> 
-    </View> 
-  )
-    
-  
   render() {
+
+    const { navigate } = this.props.navigation;
+    
     console.log("working 3");
 
     return (
 
-      <ScrollView>
+      
+      
       <View Style={Styles.container}>
+      
         <FlatList
         data={this.state.lastName}
         keyExtractor={(x, i) => i.toString()}
-        renderItem={this.renderListItem}
-        //onChangeText={id => this.setState({ id })}
-        value={this.state.lastName}
-        />
+        renderItem={renderListItem = ({ item }) => (
+        <View>
 
+        <TouchableOpacity onPress={ () => navigate('screen1', {lastName: item.lastName})} >
+          <Text Style={StyleSheet.names}> {item.lastName}</Text> 
+        </TouchableOpacity>
+
+        </View> 
+        )}
+        scrollEnabled={true}
+        value={this.state.lastName}>
+        
+        </FlatList>
+        
         </View>
-    </ScrollView>
+        
+  
 
       
     )
@@ -58,8 +66,18 @@ const Styles =StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
-
+    backgroundColor: "#F5FCFF",
+    paddingTop:10,
+    paddingRight:10,
+    paddingLeft:10
+  },
+  names: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop:10,
+    paddingRight:10,
+    paddingLeft:10
   }
 });
 
