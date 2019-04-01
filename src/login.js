@@ -4,8 +4,10 @@ import {FlatList, StyleSheet, Text, View, ScrollView, Button, TextInput, Alert,T
 class login extends Component {
   
   state = {
-    
-    lastName: []
+    scrollEnabled: true,
+    firstName: [],
+    lastName: [],
+    email:[]
   };
  
 
@@ -17,7 +19,9 @@ class login extends Component {
   
       fetch('http://192.168.2.23:100/api/employee/getAll')
       .then(response => response.json())
-      .then(lastName => this.setState({lastName}));
+      .then(lastName => this.setState({lastName}))
+      .then(email => this.setState({email}))
+      .then(firstName => this.setState({firstName}));
       
       }; 
     
@@ -34,27 +38,30 @@ class login extends Component {
       <View Style={Styles.container}>
       
         <FlatList
+        scrollEnabled={this.state.scrollEnabled}
         data={this.state.lastName}
         keyExtractor={(x, i) => i.toString()}
-        renderItem={renderListItem = ({ item }) => (
-        <View>
+        renderItem={renderListItem = ({ item }) => 
+        <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10, paddingTop: 10 }}>
 
         <TouchableOpacity onPress={ () => navigate('screen1', {lastName: item.lastName})} >
-          <Text Style={StyleSheet.names}> {item.lastName}</Text> 
+          <View style={{ width: '100%', height: 70, alignItems: 'flex-start', flexDirection: 'row', backgroundColor:'#87ceeb',borderRadius: 15 }}>
+          <View style={{width: '80%', height: 50, alignItems: 'flex-start', justifyContent: 'center'}}>
+          <Text Style={{justifyContent: 'center', flexDirection: 'row'}}> {item.firstName}  {item.lastName}     {item.email}</Text>
+          </View>
+          </View>
+           
         </TouchableOpacity>
 
         </View> 
-        )}
+        }
         scrollEnabled={true}
         value={this.state.lastName}>
         
         </FlatList>
         
         </View>
-        
-  
-
-      
+          
     )
   }
 
@@ -67,14 +74,6 @@ const Styles =StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
-    paddingTop:10,
-    paddingRight:10,
-    paddingLeft:10
-  },
-  names: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     paddingTop:10,
     paddingRight:10,
     paddingLeft:10
