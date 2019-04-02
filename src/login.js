@@ -12,11 +12,13 @@ class login extends Component {
   
   state = {
     scrollEnabled: true,
-    id:[],
+    code:[],
+    title:[],
     firstName: [],
-    lastName: [],
+    isActive: [],
     email:[],
-    displayName:[]
+    displayName:[],
+    jobCategoryId:[]
   };
  
 
@@ -29,11 +31,13 @@ class login extends Component {
       fetch('http://192.168.2.23:100/api/employee/getAll')
       //fetch('http://192.168.2.23:100/api/employee/getById/1/')
       .then(response => response.json())
-      .then(lastName => this.setState({lastName}))
+      .then(isActive => this.setState({isActive}))
       .then(email => this.setState({email}))
       .then(firstName => this.setState({firstName}))
       .then(displayName => this.setState({displayName}))
-      .then(id => this.setState({id}));
+      .then(title => this.setState({title}))
+      .then(jobCategoryId => this.setState({jobCategoryId}))
+      .then(code => this.setState({code}));
       
       }; 
     
@@ -51,12 +55,12 @@ class login extends Component {
       
         <FlatList
         scrollEnabled={this.state.scrollEnabled}
-        data={this.state.lastName}
+        data={this.state.isActive}
         keyExtractor={(x, i) => i.toString()}
         renderItem={renderListItem = ({ item }) => 
         <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10, paddingTop: 10 }}>
 
-        <TouchableOpacity onPress={ () => navigate('screen1',{firstName:item.firstName, lastName:item.lastName, email:item.email, id:item.id, displayName:item.displayName})} >
+        <TouchableOpacity onPress={ () => navigate('screen1',{firstName:item.firstName, isActive:item.isActive, email:item.email, code:item.code, displayName:item.displayName, title:item.title, jobCategoryId:item.jobCategoryId})} >
           <View style={{ width: '100%', height: 70, alignItems: 'flex-start', flexDirection: 'row', backgroundColor:'#87ceeb',borderRadius: 15 }}>
           <View style={{width: '100%', height: 50, alignItems: 'center', justifyContent: 'center'}}>
           <Text Style={{flexDirection: 'row', alignItems: "center"}}> {item.displayName}{"\n"}{item.email}</Text>
@@ -68,7 +72,7 @@ class login extends Component {
         </View> 
         }
         scrollEnabled={true}
-        value={this.state.lastName}>
+        value={this.state.isActive}>
         
         </FlatList>
         

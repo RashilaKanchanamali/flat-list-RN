@@ -11,9 +11,11 @@ class screen1 extends Component {
       
       super(props);
       this.state = {
-        id: this.props.navigation.state.params.id,
+        code: this.props.navigation.state.params.code,
+        title:this.props.navigation.state.params.title,
         firstName: this.props.navigation.state.params.firstName,
-        lastName: this.props.navigation.state.params.lastName,
+        isActive: this.props.navigation.state.params.isActive,
+        jobCategoryId:this.props.navigation.state.params.jobCategoryId,
         email: this.props.navigation.state.params.email,
         displayName: this.props.navigation.state.params.displayName
         
@@ -21,14 +23,32 @@ class screen1 extends Component {
     }
 
     onButtonPress(){
+      
+      console.log("abcd");
 
-      fetch('http://192.168.2.23:100/api/employee/save/')
-      .then(response => response.json())
+      fetch('http://192.168.2.23:100/api/employee/save/', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            code: this.state.code,
+            title:this.state.title,
+            firstName:this.state.firstName,
+            isActive:this.state.isActive,
+            jobCategoryId:this.state.jobCategoryId,
+            displayName: this.state.displayName
+        })
+
+    })
+      .then(response => response.text())
       .then((responseJson) => {
         Alert.alert(responseJson);
     }).catch((error) => {
         Alert.alert(error);
     });
+    
     }
 
     renderButton() {
@@ -47,23 +67,33 @@ class screen1 extends Component {
         
         <View style={styles.container}>
 
-        <Text>hello</Text>
-
         <TextInput
-        value= {this.state.id}
-        onChangeText={id => this.setState({ id })}/>
-
-        <TextInput>{this.state.firstName}</TextInput>
-        <TextInput>{this.state.lastName}</TextInput>
-        <TextInput>{this.state.email}</TextInput>
-        <TextInput>{this.state.displayName}</TextInput>
+        value= {this.state.code}
+        onChangeText={code => this.setState({ code })}/>
+        <TextInput
+        value= {this.state.title}
+        onChangeText={title => this.setState({ title })}
+        />
+        <TextInput
+        value= {this.state.firstName}
+        onChangeText={firstName => this.setState({ firstName })}
+        />
+        {/* <TextInput
+        value= {this.state.isActive}
+        onChangeText={isActive => this.setState({ isActive })}
+        /> */}
+        <TextInput
+        value= {this.state.jobCategoryId}
+        onChangeText={jobCategoryId => this.setState({ jobCategoryId })}
+        />
+        <TextInput
+        value= {this.state.displayName}
+        onChangeText={displayName => this.setState({ displayName })}
+        />
 
         <View style={styles.buttonStyle}>
         {this.renderButton()}
         </View>
-
-
-        
         </View>
       
       );
@@ -74,19 +104,18 @@ class screen1 extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingRight:5,
-        paddingTop: 5,
-        paddingLeft: 250,
+        paddingTop: 10,
+        paddingLeft:50,
         flex: 1,
         backgroundColor: '#F5FCFF'
     },
     buttonStyle: {
-    marginTop: 5,
-    padding: 5,
-    borderRadius: 60,
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    position: 'relative',
+        borderRadius: 60,
+        flexDirection: 'row',
+        position: 'relative',
+        paddingRight:100,
+        paddingLeft:100,
+
 }
     
 })
