@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, KeyboardAvoidingView, Text, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Alert } from 'react-native';
 import Button from './Button';
+//import {parseString} from "react-native-xml2js";
 
 class screen1 extends Component {
     static navigationOptions = {
@@ -42,9 +43,9 @@ class screen1 extends Component {
         })
 
     })
-      .then(response => response.text())
+      .then(response => response.json())
       .then((responseJson) => {
-        Alert.alert(responseJson);
+      Alert.alert(JSON.stringify(responseJson));
     }).catch((error) => {
         Alert.alert(error);
     });
@@ -63,6 +64,7 @@ class screen1 extends Component {
     render() {
       console.log("id");
       const { navigate } = this.props.navigation;
+      //const parseString = require('react-native-xml2js').parseString;
       return (
         
         <View style={styles.container}>
@@ -93,6 +95,7 @@ class screen1 extends Component {
 
         <View style={styles.buttonStyle}>
         {this.renderButton()}
+        <Text></Text>
         </View>
         </View>
       

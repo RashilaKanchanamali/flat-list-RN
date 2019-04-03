@@ -29,7 +29,7 @@ class login extends Component {
    fetchData = async () => { 
   
       fetch('http://192.168.2.23:100/api/employee/getAll')
-      //fetch('http://192.168.2.23:100/api/employee/getById/1/')
+      //fetch('http://192.168.2.23:100/api/employee/getById/215/')
       .then(response => response.json())
       .then(isActive => this.setState({isActive}))
       .then(email => this.setState({email}))
