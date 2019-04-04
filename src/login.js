@@ -12,13 +12,16 @@ class login extends Component {
   
   state = {
     scrollEnabled: true,
+    id:[],
     code:[],
     title:[],
     firstName: [],
-    isActive: [],
+    lastName: [],
     email:[],
-    displayName:[],
-    jobCategoryId:[]
+    userName:[],
+    jobCategoryId:[],
+    state:"modify",
+    companyId:[]
   };
  
 
@@ -29,14 +32,16 @@ class login extends Component {
    fetchData = async () => { 
   
       fetch('http://192.168.2.23:100/api/employee/getAll')
-      //fetch('http://192.168.2.23:100/api/employee/getById/215/')
       .then(response => response.json())
-      .then(isActive => this.setState({isActive}))
+      .then(id => this.setState({id}))
       .then(email => this.setState({email}))
       .then(firstName => this.setState({firstName}))
-      .then(displayName => this.setState({displayName}))
+      .then(userName => this.setState({userName}))
       .then(title => this.setState({title}))
       .then(jobCategoryId => this.setState({jobCategoryId}))
+      .then(state => this.setState({state}))
+      .then(companyId => this.setState({companyId}))
+      .then(lastName => this.setState({lastName}))
       .then(code => this.setState({code}));
       
       }; 
@@ -55,15 +60,15 @@ class login extends Component {
       
         <FlatList
         scrollEnabled={this.state.scrollEnabled}
-        data={this.state.isActive}
+        data={this.state.id}
         keyExtractor={(x, i) => i.toString()}
         renderItem={renderListItem = ({ item }) => 
         <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10, paddingTop: 10 }}>
 
-        <TouchableOpacity onPress={ () => navigate('screen1',{firstName:item.firstName, isActive:item.isActive, email:item.email, code:item.code, displayName:item.displayName, title:item.title, jobCategoryId:item.jobCategoryId})} >
+        <TouchableOpacity onPress={ () => navigate('screen1',{id:item.id, firstName:item.firstName, lastName:item.lastName, email:item.email, code:item.code, userName:item.userName, title:item.title, jobCategoryId:item.jobCategoryId, state:item.state, companyId:item.companyId})} >
           <View style={{ width: '100%', height: 70, alignItems: 'flex-start', flexDirection: 'row', backgroundColor:'#87ceeb',borderRadius: 15 }}>
           <View style={{width: '100%', height: 50, alignItems: 'center', justifyContent: 'center'}}>
-          <Text Style={{flexDirection: 'row', alignItems: "center"}}> {item.displayName}{"\n"}{item.email}</Text>
+          <Text Style={{flexDirection: 'row', alignItems: "center"}}> {item.id}{"\n"}{item.firstName}</Text>
           </View>
           </View>
            
@@ -72,7 +77,7 @@ class login extends Component {
         </View> 
         }
         scrollEnabled={true}
-        value={this.state.isActive}>
+        value={this.state.id}>
         
         </FlatList>
         

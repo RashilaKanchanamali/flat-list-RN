@@ -12,13 +12,16 @@ class screen1 extends Component {
       
       super(props);
       this.state = {
+        id: this.props.navigation.state.params.id,
         code: this.props.navigation.state.params.code,
         title:this.props.navigation.state.params.title,
         firstName: this.props.navigation.state.params.firstName,
-        isActive: this.props.navigation.state.params.isActive,
+        lastName: this.props.navigation.state.params.lastName,
         jobCategoryId:this.props.navigation.state.params.jobCategoryId,
         email: this.props.navigation.state.params.email,
-        displayName: this.props.navigation.state.params.displayName
+        userName: this.props.navigation.state.params.userName,
+        state:this.props.navigation.state.params.state,
+        companyId:props.navigation.state.params.companyId
         
       }
     }
@@ -34,12 +37,15 @@ class screen1 extends Component {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+            id: this.state.id,
             code: this.state.code,
             title:this.state.title,
             firstName:this.state.firstName,
-            isActive:this.state.isActive,
+            lastName:this.state.lastName,
             jobCategoryId:this.state.jobCategoryId,
-            displayName: this.state.displayName
+            userName: this.state.userName,
+            state:this.state.state,
+            companyId:this.companyId
         })
 
     })
@@ -70,6 +76,10 @@ class screen1 extends Component {
         <View style={styles.container}>
 
         <TextInput
+        value= {this.state.id}
+        onChangeText={id => this.setState({ id })}
+        />
+        <TextInput
         value= {this.state.code}
         onChangeText={code => this.setState({ code })}/>
         <TextInput
@@ -80,17 +90,22 @@ class screen1 extends Component {
         value= {this.state.firstName}
         onChangeText={firstName => this.setState({ firstName })}
         />
-        {/* <TextInput
-        value= {this.state.isActive}
-        onChangeText={isActive => this.setState({ isActive })}
-        /> */}
+        <TextInput
+        value= {this.state.state}
+        onChangeText={state => this.setState({ state })}
+        />
         <TextInput
         value= {this.state.jobCategoryId}
         onChangeText={jobCategoryId => this.setState({ jobCategoryId })}
         />
         <TextInput
-        value= {this.state.displayName}
-        onChangeText={displayName => this.setState({ displayName })}
+        value= {this.state.userName}
+        onChangeText={userName => this.setState({ userName })}
+        />
+
+        <TextInput
+          value={this.state.companyId}
+          onChangeText={companyId => this.setState({companyId})}
         />
 
         <View style={styles.buttonStyle}>
