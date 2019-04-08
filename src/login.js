@@ -3,11 +3,7 @@ import {FlatList, StyleSheet, Text, View, ScrollView, Button, TextInput, Alert,T
 
 class login extends Component {
   static navigationOptions = {
-    title: 'Users',
-  //   headerTitleStyle: { 
-  //     textAlign:"center", 
-  //     flex:1
-  // }
+    title: 'Users'
   };
   
   state = {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Text, Alert } from 'react-native';
 import Button from './Button';
-//import {parseString} from "react-native-xml2js";
 
 class screen1 extends Component {
     static navigationOptions = {
@@ -13,9 +12,7 @@ class screen1 extends Component {
       super(props);
       this.state = {
         id: this.props.navigation.state.params.id,
-        user:'',
-        details:'',
-        firstName:''
+        user:''
       
       }
     }
@@ -49,26 +46,24 @@ class screen1 extends Component {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+    
+            id: this.state.user.id,
+            code: this.state.user.code,
+            title:this.state.user.title,
+            jobCategoryId:this.state.user.jobCategoryId,
+            timeStamp:this.state.user.timeStamp,
+            companyId:this.state.user.companyId,
             firstName:this.state.firstName,
-            // id: this.state.user.id,
-            // code: this.state.user.code,
-            // title:this.state.user.title,
-            // firstName:this.state.user.firstName,
-            // lastName:this.state.user.lastName,
-            // jobCategoryId:this.state.user.jobCategoryId,
-            // userName: this.state.user.userName,
-            // state:this.state.user.state,
-            // companyId:this.state.user.companyId
-          
+            lastName:this.state.lastName,
+            email:this.state.email,
+            userName: this.state.userName
+
         })
 
     })
       .then(response => response.json())
       .then((responseJson) => {
-        // this.setState({
-        //   details:responseJson
-        // })
-      //Alert.alert(JSON.stringify(responseJson));
+      Alert.alert(JSON.stringify(responseJson));
     }).catch((error) => {
         Alert.alert(error);
     });
@@ -89,16 +84,39 @@ class screen1 extends Component {
       const { navigate } = this.props.navigation;
       return (
         
-        <View style={styles.container}>
+        <View style={styles.container}>              
 
-          <TextInput
-                                
-            placeholder=   {this.state.user.firstName}
-            onChangeText={firstName => this.setState({ firstName})}
-            //value={this.state.user.firstName}
-            underlineColorAndroid='transparent'
-            blurOnSubmit={true}
-           />
+        <TextInput                      
+        placeholder=   {this.state.user.firstName}
+        onChangeText={firstName => this.setState({ firstName})}
+        //value={this.state.user.firstName}
+        underlineColorAndroid='transparent'
+        blurOnSubmit={true}
+        />
+
+        <TextInput                      
+        placeholder=   {this.state.user.lastName}
+        onChangeText={lastName => this.setState({ lastName})}
+        //value={this.state.user.firstName}
+        underlineColorAndroid='transparent'
+        blurOnSubmit={true}
+        />
+
+        <TextInput                      
+        placeholder=   {this.state.user.email}
+        onChangeText={email => this.setState({ email})}
+        //value={this.state.user.firstName}
+        underlineColorAndroid='transparent'
+        blurOnSubmit={true}
+        />
+
+        <TextInput                      
+        placeholder=   {this.state.user.userName}
+        onChangeText={userName => this.setState({ userName})}
+        //value={this.state.user.firstName}
+        underlineColorAndroid='transparent'
+        blurOnSubmit={true}
+        />
                         
 
 
