@@ -23,7 +23,7 @@ const styles = {
     },
     buttonStyle: {
         flex: 1,
-        alignSelf: 'stretch',
+        alignSelf: 'center',
         backgroundColor: '#add8e6',
         marginLeft: 20,
         marginRight: 20,

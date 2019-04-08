@@ -12,7 +12,8 @@ class screen1 extends Component {
       super(props);
       this.state = {
         id: this.props.navigation.state.params.id,
-        user:''
+        user:'',
+        details:''
       
       }
     }
@@ -63,7 +64,10 @@ class screen1 extends Component {
     })
       .then(response => response.json())
       .then((responseJson) => {
-      Alert.alert(JSON.stringify(responseJson));
+        this.setState ({
+          user:responseJson
+        })
+      Alert.alert(JSON.stringify(responseJson.firstName));
     }).catch((error) => {
         Alert.alert(error);
     });
@@ -84,12 +88,18 @@ class screen1 extends Component {
       const { navigate } = this.props.navigation;
       return (
         
-        <View style={styles.container}>              
+        <View style={styles.container}>  
+
+        <TextInput                      
+        placeholder=   {this.state.user.firstName}
+        underlineColorAndroid='transparent'
+        blurOnSubmit={true}
+        />
+
 
         <TextInput                      
         placeholder=   {this.state.user.firstName}
         onChangeText={firstName => this.setState({ firstName})}
-        //value={this.state.user.firstName}
         underlineColorAndroid='transparent'
         blurOnSubmit={true}
         />
@@ -97,7 +107,6 @@ class screen1 extends Component {
         <TextInput                      
         placeholder=   {this.state.user.lastName}
         onChangeText={lastName => this.setState({ lastName})}
-        //value={this.state.user.firstName}
         underlineColorAndroid='transparent'
         blurOnSubmit={true}
         />
@@ -105,7 +114,6 @@ class screen1 extends Component {
         <TextInput                      
         placeholder=   {this.state.user.email}
         onChangeText={email => this.setState({ email})}
-        //value={this.state.user.firstName}
         underlineColorAndroid='transparent'
         blurOnSubmit={true}
         />
@@ -113,16 +121,15 @@ class screen1 extends Component {
         <TextInput                      
         placeholder=   {this.state.user.userName}
         onChangeText={userName => this.setState({ userName})}
-        //value={this.state.user.firstName}
         underlineColorAndroid='transparent'
         blurOnSubmit={true}
         />
-                        
-
 
         <View style={styles.buttonStyle}>
         {this.renderButton()}
-        </View> 
+        </View>
+
+        
 
         </View>
       
@@ -145,6 +152,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         paddingRight:100,
         paddingLeft:100,
+        paddingTop:200
 
 }
     
