@@ -90,11 +90,9 @@ class screen1 extends Component {
         
         <View style={styles.container}>  
 
-        <TextInput                      
-        placeholder=   {this.state.user.firstName}
-        underlineColorAndroid='transparent'
-        blurOnSubmit={true}
-        />
+        <Text>
+        {this.state.user.firstName}
+        </Text>
 
 
         <TextInput                      
