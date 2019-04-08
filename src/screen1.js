@@ -68,7 +68,7 @@ class screen1 extends Component {
         // this.setState({
         //   details:responseJson
         // })
-      Alert.alert(JSON.stringify(responseJson));
+      //Alert.alert(JSON.stringify(responseJson));
     }).catch((error) => {
         Alert.alert(error);
     });
@@ -91,39 +91,20 @@ class screen1 extends Component {
         
         <View style={styles.container}>
 
-        {/* <TextInput>
-          { this.state.user.id }
-          {id => this.setState({ id })}
-        </TextInput>
-
-        <TextInput>
-        {this.state.user.firstName}
-        {firstName => this.setState({ firstName })}
-        </TextInput>        */}
-                            <TextInput
-                              
-                                 placeholder=   {this.state.user.firstName}
-                                // placeholderTextColor="#fff"
-                                //autoCorrect={true}
-                                onChangeText={firstName => this.setState({ firstName})}
-                                value={this.state.user.firstName}
-                                style={styles.inputStyle}
-                                underlineColorAndroid='transparent'
-                                blurOnSubmit={true}
-                                //returnKeyType="done"
-                            />
-
-        <Text
-          placeholder=   {this.state.firstName}
-        />
+          <TextInput
+                                
+            placeholder=   {this.state.user.firstName}
+            onChangeText={firstName => this.setState({ firstName})}
+            //value={this.state.user.firstName}
+            underlineColorAndroid='transparent'
+            blurOnSubmit={true}
+           />
                         
 
 
         <View style={styles.buttonStyle}>
         {this.renderButton()}
-        </View>
-
-        
+        </View> 
 
         </View>
       
@@ -147,18 +128,7 @@ const styles = StyleSheet.create({
         paddingRight:100,
         paddingLeft:100,
 
-},
-inputStyle: {
-  color: '#000',
-  // paddingRight: 5,
-  // paddingLeft: 5,
-  fontSize: 18,
-  //lineHeight: 23,
-  flex: 2,
-  // borderBottomColor: 'transparent'
-  // backgroundColor: 'red',
-  // width: '100%'
-},
+}
     
 })
 export default screen1 ;
