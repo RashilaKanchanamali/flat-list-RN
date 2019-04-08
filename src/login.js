@@ -13,15 +13,7 @@ class login extends Component {
   state = {
     scrollEnabled: true,
     id:[],
-    code:[],
-    title:[],
-    firstName: [],
-    lastName: [],
-    email:[],
-    userName:[],
-    jobCategoryId:[],
-    state:"modify",
-    companyId:[]
+    firstName: []
   };
  
 
@@ -34,17 +26,8 @@ class login extends Component {
       fetch('http://192.168.2.23:100/api/employee/getAll')
       .then(response => response.json())
       .then(id => this.setState({id}))
-      .then(email => this.setState({email}))
-      .then(firstName => this.setState({firstName}))
-      .then(userName => this.setState({userName}))
-      .then(title => this.setState({title}))
-      .then(jobCategoryId => this.setState({jobCategoryId}))
-      .then(state => this.setState({state}))
-      .then(companyId => this.setState({companyId}))
-      .then(lastName => this.setState({lastName}))
-      .then(code => this.setState({code}));
-      
-      }; 
+      .then(firstName => this.setState({firstName}));
+      }
     
   render() {
 
@@ -65,7 +48,7 @@ class login extends Component {
         renderItem={renderListItem = ({ item }) => 
         <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10, paddingTop: 10 }}>
 
-        <TouchableOpacity onPress={ () => navigate('screen1',{id:item.id, firstName:item.firstName, lastName:item.lastName, email:item.email, code:item.code, userName:item.userName, title:item.title, jobCategoryId:item.jobCategoryId, state:item.state, companyId:item.companyId})} >
+        <TouchableOpacity onPress={ () => navigate('screen1',{id:item.id})} >
           <View style={{ width: '100%', height: 70, alignItems: 'flex-start', flexDirection: 'row', backgroundColor:'#87ceeb',borderRadius: 15 }}>
           <View style={{width: '100%', height: 50, alignItems: 'center', justifyContent: 'center'}}>
           <Text Style={{flexDirection: 'row', alignItems: "center"}}> {item.id}{"\n"}{item.firstName}</Text>
@@ -77,7 +60,8 @@ class login extends Component {
         </View> 
         }
         scrollEnabled={true}
-        value={this.state.id}>
+        //// value={this.state.id}
+        >
         
         </FlatList>
         
