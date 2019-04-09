@@ -12,8 +12,7 @@ class screen1 extends Component {
       super(props);
       this.state = {
         id: this.props.navigation.state.params.id,
-        user:'',
-        details:''
+        user:''
       
       }
     }
@@ -64,10 +63,13 @@ class screen1 extends Component {
     })
       .then(response => response.json())
       .then((responseJson) => {
+
+        //console.warn(responseJson)
+
         this.setState ({
           user:responseJson
         })
-      Alert.alert(JSON.stringify(responseJson.firstName));
+      Alert.alert(JSON.stringify(responseJson));
     }).catch((error) => {
         Alert.alert(error);
     });
